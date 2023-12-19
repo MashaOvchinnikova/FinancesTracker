@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+    const searchForOperation = () => {
+        const searchInputValue = document.getElementById("operation_search").value;
+        window.location.href = `/${searchInputValue}`;
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-center flex-col items-center">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ url_for('add') }}" method="post">
+          <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" name="date" type="text" placeholder="Дата операции (гггг-мм-дд)">
+          </div>
+          <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="kind" name="kind" type="text" placeholder="Тип операции (income/outcome)">
+          </div>
+          <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" name="amount" type="text" placeholder="Сумма операции">
+          </div>
+          <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" type="text" placeholder="Описание">
+          </div>
+          <div class="flex items-center justify-between">
+            <button type="submit" class="bg-green-300 hover:bg-green-500 rounded-3xl py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+              Добавить операцию
+            </button>
+          </div>
+    </form>
+    <div class="flex my-3 gap-5">
+        <input id="operation_search" type="text" placeholder="Тип операции" class="text-xl">
+        <button onclick="searchForOperation()" class="border-2 hover:bg-gray-500 rounded-3xl bg-gray-300 p-3">Поиск по операциям</button>
+    </div>
+    <span>income или outcome</span>
+    {% for operation in operations %}
+        <div class="flex rounded-3 border-2 p-3 mt-5">
+            <img width="150" src="{{url_for('static', path='cat_{img_id}.png'.format(img_id=image_id))}}" alt="Котик" class="mr-5">
+            <div class="flex flex-col">
+                <span class="text-2xl font-bold">{{ operation.id }}</span>
+                <span class="text-lg">Дата операции: {{ operation.date }}</span>
+                <span class="text-lg">Тип операции: {{ operation.kind }}</span>
+                <span class="text-lg">Сумма: {{ operation.amount }}</span>
+                <span class="text-lg">Описание: {{ operation.description }}</span>
+            </div>
+            <a class="hover:bg-red-500 border-2 rounded-3xl bg-red-300 p-3" href="{{ url_for('delete', operation_id=operation.id) }}">Удалить</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
