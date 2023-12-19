@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+python-dotenv
+pydantic-settings
+python-jose
+passlib[bcrypt]
+python-multipart
+jinja2
+websockets
