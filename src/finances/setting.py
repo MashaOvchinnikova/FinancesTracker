@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     server_host: str = "0.0.0.0"
+    # server_host: str = "localhost"
     server_port: int = 8000
     database_url: str = "sqlite:///./database.sqlite3"
 

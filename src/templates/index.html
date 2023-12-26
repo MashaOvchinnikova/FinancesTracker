@@ -11,6 +11,15 @@
 
 {% block content %}
 <div class="flex justify-center flex-col items-center">
+    <div class="flex my-3 gap-5">
+         <form action="{{ url_for('get_chat_page') }}" target="_blank" method="get">
+             <div class="flex items-center justify-between">
+                 <button type="submit" class="bg-orange-300 hover:bg-orange-500 rounded-3xl py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+                     Перейти в чат
+                 </button>
+             </div>
+         </form>
+    </div>
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ url_for('add') }}" method="post">
           <div class="mb-4">
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" name="date" type="text" placeholder="Дата операции (гггг-мм-дд)">
