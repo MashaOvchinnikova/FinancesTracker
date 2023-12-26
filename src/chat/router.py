@@ -60,7 +60,7 @@ async def get_last_messages(session: Session = Depends(get_session)):
 @router.websocket("/ws/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, client_id: int):
     await manager.connect(websocket)
-    await manager.broadcast(f"Client #{client_id} joined the chat")
+    await manager.broadcast(f"Client #{client_id} joined the chat", add_to_db=False)
     try:
         while True:
             data = await websocket.receive_text()
